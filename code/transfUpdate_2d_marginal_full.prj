@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2018b">
-  <configuration build-checksum="3220368045" file="D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\nns_2d_square_parallel.prj" location="D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code" name="nns_2d_square_parallel" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="2346177280" file="D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\transfUpdate_2d_marginal_full.prj" location="D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code" name="transfUpdate_2d_marginal_full" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
       <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
@@ -34,7 +34,7 @@
       <param.DefaultTestFile />
       <param.MergeInstrumentationResults>false</param.MergeInstrumentationResults>
       <param.VerificationMode>option.VerificationMode.None</param.VerificationMode>
-      <param.VerificationStatus>option.VerificationStatus.Passed</param.VerificationStatus>
+      <param.VerificationStatus>option.VerificationStatus.FailedTest</param.VerificationStatus>
       <param.EnableMexProfiling>false</param.EnableMexProfiling>
       <var.BuiltWithMexProfiling>false</var.BuiltWithMexProfiling>
       <param.CustomSourceCode />
@@ -849,11 +849,12 @@
     <param.objective>option.objective.c</param.objective>
     <param.WorkflowStep>workflowSummary</param.WorkflowStep>
     <param.TestSnippets>
-      <item>nns_2d_square_parallel(coordX, coordLong, ncoord, nN, rho, 8)</item>
+      <item>MCMC2d_marginal(init, dataIn, 1);</item>
+      <item>MCMC2d_marginal(init, dataIn, niter);</item>
     </param.TestSnippets>
     <param.ExternalFcnMajority>column</param.ExternalFcnMajority>
     <param.UseGlobals>option.UseGlobals.No</param.UseGlobals>
-    <param.outputfile>${PROJECT_ROOT}\nns_2d_square_parallel_mex.mexw64</param.outputfile>
+    <param.outputfile>${PROJECT_ROOT}\transfUpdate_2d_marginal_full_mex.mexw64</param.outputfile>
     <param.version>R2012a</param.version>
     <param.HasECoderFeatures>false</param.HasECoderFeatures>
     <param.HasGpuCoder>true</param.HasGpuCoder>
@@ -868,22 +869,22 @@
     <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
     <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
     <param.EnableScreener>true</param.EnableScreener>
-    <param.AnnotationChecksum>2871147040</param.AnnotationChecksum>
+    <param.AnnotationChecksum>1866003390</param.AnnotationChecksum>
     <var.LegacyTarget />
     <var.MirrorOnOpen>false</var.MirrorOnOpen>
     <param.FixedPointEnabled>false</param.FixedPointEnabled>
     <var.redirectedInputTypeData />
-    <var.DismissScreener>false</var.DismissScreener>
+    <var.DismissScreener>true</var.DismissScreener>
     <param.unifiedParamStorage />
-    <var.gc.lastOutputRoot>codegen\mex\nns_2d_square_parallel</var.gc.lastOutputRoot>
+    <var.gc.lastOutputRoot>codegen\mex\transfUpdate_2d_marginal_full</var.gc.lastOutputRoot>
     <var.gc.lastOutputType>MEX_FILE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>150164439</var.gc.preBuildChecksum>
-    <var.cfi.lastOutputRoot>codegen\mex\nns_2d_square_parallel</var.cfi.lastOutputRoot>
-    <var.cfi.preBuildChecksum>478887832</var.cfi.preBuildChecksum>
-    <var.lastCfiTestSnippet>nns_2d_square_parallel(coordX, coordLong, ncoord, nN, rho, 8)</var.lastCfiTestSnippet>
+    <var.gc.preBuildChecksum>859989844</var.gc.preBuildChecksum>
+    <var.cfi.lastOutputRoot />
+    <var.cfi.preBuildChecksum>3140766141</var.cfi.preBuildChecksum>
+    <var.lastCfiTestSnippet>MCMC2d_marginal(init, dataIn, 1);</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\nns_2d_square_parallel.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;61556509&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
-    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\nns_2d_square_parallel.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\calculateEuclideanDist.m&lt;/file&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\MarginalNNGPMuS_APPR_full.m&lt;/file&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\nns_2d_square_parallel.m&lt;/file&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\nnsearch_approx.m&lt;/file&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\posteriorLog_full.m&lt;/file&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\Reshape2d.m&lt;/file&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\SapprSubCov_full.m&lt;/file&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\transfUpdate_2d_marginal_full.m&lt;/file&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MCMC\2DSupportFunctions\Transfer_Coord.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;1503126152&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\calculateEuclideanDist.m&lt;/file&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\MarginalNNGPMuS_APPR_full.m&lt;/file&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\nns_2d_square_parallel.m&lt;/file&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\nnsearch_approx.m&lt;/file&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\posteriorLog_full.m&lt;/file&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\Reshape2d.m&lt;/file&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\SapprSubCov_full.m&lt;/file&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\transfUpdate_2d_marginal_full.m&lt;/file&gt;&lt;file&gt;D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MCMC\2DSupportFunctions\Transfer_Coord.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.NoDefaultJIT>false</param.NoDefaultJIT>
     <param.configImportActive>false</param.configImportActive>
@@ -892,10 +893,10 @@
     <var.boundToGui>true</var.boundToGui>
     <var.isConfigDialog>false</var.isConfigDialog>
     <var.ecoderEnabled>false</var.ecoderEnabled>
-    <param.mex.outputfile>nns_2d_square_parallel_mex</param.mex.outputfile>
-    <param.grt.outputfile>nns_2d_square_parallel</param.grt.outputfile>
+    <param.mex.outputfile>transfUpdate_2d_marginal_full_mex</param.mex.outputfile>
+    <param.grt.outputfile>transfUpdate_2d_marginal_full</param.grt.outputfile>
     <param.artifact>option.target.artifact.mex</param.artifact>
-    <param.outputfile>${PROJECT_ROOT}\nns_2d_square_parallel_mex.mexw64</param.outputfile>
+    <param.outputfile>${PROJECT_ROOT}\transfUpdate_2d_marginal_full_mex.mexw64</param.outputfile>
     <param.CppNamespace />
     <param.CppPackagesToNamespaces>true</param.CppPackagesToNamespaces>
     <param.CppNamespaceForMathworksCode>coder</param.CppNamespaceForMathworksCode>
@@ -1000,8 +1001,8 @@
       <var.MirrorOnOpen />
       <param.FixedPointEnabled />
       <var.redirectedInputTypeData />
-      <var.DismissScreener />
       <param.unifiedParamStorage />
+      <var.cfi.lastOutputRoot />
       <var.outdatedOnRestore />
       <param.forceMexBuild />
       <param.NoDefaultJIT />
@@ -1094,23 +1095,33 @@
       <param.FixedPointUseDesignRanges />
     </unset>
     <fileset.entrypoints>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}\nns_2d_square_parallel.m">
-        <Marker>1620953787509</Marker>
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}\transfUpdate_2d_marginal_full.m">
+        <Marker>1621285323577</Marker>
       </file>
     </fileset.entrypoints>
     <fileset.testbench />
     <fileset.inputtypes>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}\nns_2d_square_parallel.m">
-        <Inputs fileName="nns_2d_square_parallel.m" functionName="nns_2d_square_parallel">
-          <Input Name="coord" typeId="0" />
-          <Input Name="coordTrans" typeId="0" />
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}\transfUpdate_2d_marginal_full.m">
+        <Inputs fileName="transfUpdate_2d_marginal_full.m" functionName="transfUpdate_2d_marginal_full">
+          <Input Name="transf0" typeId="0" />
           <Input Name="bi" typeId="1" />
-          <Input Name="n_coord" typeId="2" />
+          <Input Name="Y" typeId="1" />
+          <Input Name="Sx" typeId="0" />
+          <Input Name="coordY" typeId="2" />
+          <Input Name="sigma" typeId="1" />
+          <Input Name="alpha" typeId="3" />
+          <Input Name="rho" typeId="3" />
+          <Input Name="coord" typeId="0" />
+          <Input Name="K1" typeId="3" />
+          <Input Name="K2" typeId="3" />
+          <Input Name="logsig" typeId="0" />
+          <Input Name="Sig" typeId="4" />
+          <Input Name="logAR" typeId="1" />
+          <Input Name="SigAR" typeId="0" />
           <Input Name="nsubj" typeId="3" />
-          <Input Name="K" typeId="2" />
-          <Input Name="rho" typeId="2" />
-          <Input Name="parworkers" typeId="2" />
-          <Input Name="sparseBMat" typeId="4" />
+          <Input Name="nparts" typeId="3" />
+          <Input Name="bnds" typeId="0" />
+          <Input Name="parworkers" typeId="3" />
           <idpTable>
             <type typeId="0">
               <Class>double</Class>
@@ -1132,10 +1143,10 @@
             </type>
             <type typeId="2">
               <Class>double</Class>
-              <Size>1 x 1</Size>
+              <Size>:inf x :inf x :inf</Size>
               <Value />
               <InitialValue />
-              <UserDefined>false</UserDefined>
+              <UserDefined>true</UserDefined>
               <Complex>false</Complex>
               <Sparse>false</Sparse>
             </type>
@@ -1144,16 +1155,17 @@
               <Size>1 x 1</Size>
               <Value />
               <InitialValue />
-              <UserDefined>true</UserDefined>
+              <UserDefined>false</UserDefined>
               <Complex>false</Complex>
               <Sparse>false</Sparse>
             </type>
             <type typeId="4">
-              <Class>logical</Class>
-              <Size>1 x 1</Size>
+              <Class>double</Class>
+              <Size>:inf x :inf x 3</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>
+              <Complex>false</Complex>
               <Sparse>false</Sparse>
             </type>
           </idpTable>
@@ -1161,7 +1173,7 @@
       </file>
     </fileset.inputtypes>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="nns_2d_square_parallel_mex.mexw64" optional="false">D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\nns_2d_square_parallel_mex.mexw64</file>
+      <file location="${PROJECT_ROOT}" name="transfUpdate_2d_marginal_full_mex.mexw64" optional="false">D:\Dropbox\projects\SpatialProjectGIT\SpatialAnalysis\GroupwiseReg\code\Matlab\MarginalNNGP\code\transfUpdate_2d_marginal_full_mex.mexw64</file>
     </build-deliverables>
     <workflow />
     <matlab>

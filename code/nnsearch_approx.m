@@ -9,7 +9,8 @@ function outIdx= nnsearch_approx(coordLong, K, ncoord, nsubj, parworkers)
 % parworkers: number of core utilized for parrallel computing
 
 outIdx3d = zeros(ncoord, K, nsubj);
-parfor (j =1:nsubj,parworkers)
+% parfor (j =1:nsubj, parworkers)
+ for j =1:nsubj
     nnidxsBtwsubj = zeros(ncoord, K);
     if j>1
         nnidxsBtwsubj=knnsearch(coordLong(1:((j-1)*ncoord),:), coordLong((1:ncoord)+(j-1)*ncoord,:), 'K', K);

@@ -1,5 +1,5 @@
 % function [nnIdx, Bt] = nns_2d_square_parallel(nnDict,coord, coordTrans, incre, K, rho,  parworkers)
-function [nnIdx, Bt, BtMat] = nns_2d_square_parallel(coord, coordTrans, n_coord, nsubj, K, rho, parworkers)
+function [nnIdx, Bt, BtMat] = nns_2d_square_parallel(coord, coordTrans, Sx, n_coord, nsubj, K,alpha, rho, parworkers, sparseBMat)
 
 % n_coord = size(coordTrans, 1);
 Bt = zeros(n_coord, K);
@@ -43,19 +43,20 @@ Bt = zeros(n_coord, K);
 % end
 
 [nnIdx, nnDist] = knnsearch(coord, coordTrans, 'K', K);
-covMat = exp(-rho*nnDist);
+covMat = alpha*exp(-rho*nnDist);
+% biMat = repmat(bi, 1, n_coord/nsubj);
+% bvec = biMat(:);
 
 parfor (i=1:n_coord, parworkers)
-    Bt(i,:) = covMat(i,:)/exp(-rho*squareform(pdist(coord(nnIdx(i,:),:))));
+    Bt(i,:) = covMat(i,:)/Sx(nnIdx(i,:),nnIdx(i,:));
+%     exp(-rho*squareform(pdist(coord(nnIdx(i,:),:))));
 %     Ft(i) = alpha+sigma-alpha*Bt(i,:)*covMat(i,:)';
 end
 
-% BtMat = zeros(n_coord, n_coord/nsubj);
-% for i=1:n_coord
-%      BtMat(i, nnIdx(i,:)) = Bt(i,:);
-% end
-
-BtMat=sparse(repmat((1:n_coord)', K,1), nnIdx(:), Bt(:), n_coord, n_coord/nsubj);
-
+if sparseBMat
+    BtMat=sparse(repmat((1:n_coord)', K,1), nnIdx(:), Bt(:), n_coord, n_coord/nsubj);
+else
+    BtMat=spalloc(nsubj,nsubj,1);
+end
 
 end

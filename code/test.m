@@ -623,7 +623,7 @@ subplot(2,2,4);imagesc(abs(Lorg-eye(nsubj*Ncoord))>0); colormap jet; colorbar;ti
 %% nearest neighbor search
 alpha=1;
 rho=1;
-nrow = 40;
+nrow = 10;
 nsubj=3;
 testMat = ones(nrow, nrow);
 Ncoord = length(testMat(:));
@@ -633,23 +633,36 @@ coordX = [coord_x, coord_y];
 coord1 = coordX/1.5+1/5;
 coord2 = coordX/3;
 coord3 = coordX/1.5+0.5;
-coordLong = [coord1;coord2;coord3];
-nN = 5;
-ncoord = size(coordLong, 1);
+coordY = [];
+coordY(:,:,1)=coord1;
+coordY(:,:,2)=coord2;
+coordY(:,:,3)=coord3;
 
-Y = zeros(ncoord, 1);
+coordLong = Reshape2d(coordY);
+ncoord = size(coordLong, 1);
+Y = ones(ncoord, 1);
 
 tic
 Sx = alpha*exp(-rho*squareform(pdist(coordX)));
 toc
+bi = [1,1.5,0.5]';
 
-tic
-[nnidxs, bs, bMat1] = nns_2d_square_parallel_mex(coordX, coordLong, ncoord, nsubj, nN, rho, 8);
-toc
+K1 = bi(1)*exp(-pdist2(coord1, coordX));
+K2 = bi(2)*exp(-pdist2(coord2, coordX));
+K3 = bi(3)*exp(-pdist2(coord3, coordX));
+K12 = K1/Sx*K2';
+K13 = K1/Sx*K3';
+K23 = K2/Sx*K3';
+S1=bi(1)^2*exp(-squareform(pdist(coord1)))+sigma(1)*eye(Ncoord);
+S2=bi(2)^2*exp(-squareform(pdist(coord2)))+sigma(2)*eye(Ncoord);
+S3=bi(3)^2*exp(-squareform(pdist(coord3)))+sigma(3)*eye(Ncoord);
 
-tic
-Sy = bMat1(1:Ncoord,:)*Sx*bMat1(1:Ncoord,:)';
-toc
+S123 = [S1, K12, K13; K12', S2, K23; K13', K23', S3];
+
+% 
+% tic
+% Sy = bMat1(1:Ncoord,:)*Sx*bMat1(1:Ncoord,:)';
+% toc
 
 % tic
 % Sy = bMatFull*Sx*bMatFull';
@@ -691,34 +704,59 @@ toc
 % 
 % ComparisonFig(spSy, Sy);
 
-%
-nN = 20;
-nparts=20;
-nnidxsBetweensubjs = cell(nsubj-1,1);
-Nc = ncoord/nparts;
-nnidxAPPR = nnsearch_approx(coordLong, int32(nN), int32(Nc), nparts,int32(16));
 
-tic
-Aoutv5 = MarginalNNGPMuS_APPR_mex(Y, 1, 0.1,nnidxAPPR, nN, Sy, false, 8);
-Aoutv5.loglik
-toc
+% tic
+% Aoutv5 = MarginalNNGPMuS_APPR_mex(Y, 1, 0.1,nnidxAPPR, nN, Sy, false, 8);
+% Aoutv5.loglik
+% toc
 
+
+sigma = 0.0001*ones(nsubj,1);
+K1 = 5;
+K2 = 20;
+nparts=3;
 tic
-Aoutv1 = MarginalNNGPMuS_APPR_v1_mex(Y, 1, 0.1,nnidxAPPR, nN, Sx, bs, nnidxs, false, 8);
+[nnidxs, bs, ~] = nns_2d_square_parallel(coordX, coordLong, Sx, ncoord, nsubj, K1, 1,1,1, false);
+nnidxAPPR = nnsearch_approx(coordLong,K2,ncoord/nparts, nparts, int32(16));
+Aoutv1 = MarginalNNGPMuS_APPR_full(Y, coordLong,nsubj,bi,1,1,sigma, nnidxAPPR, K2, Sx, bs, nnidxs, true, 2);
 Aoutv1.loglik
 toc
 
-[Lorg, Dorg] = ldl(SyAppr);
+tic
+[nnidxs, bs, ~] = nns_2d_square_parallel(coordX, coordLong, Sx, ncoord, nsubj, K1, 1,1,1, false);
+nnidxAPPR = nnsearch_approx(coordLong,K2,ncoord/nparts, nparts, int32(16));
+Aoutv1 = MarginalNNGPMuS_APPR_v1(Y,nsubj,bi,1,0.1*ones(nsubj,1), nnidxAPPR, K2, Sx, bs, nnidxs, true, 2);
+Aoutv1.loglik
+toc
+
+tic
+llk = posteriorLog(Y,coordY, coordX, bi, ncoord, nsubj, nparts, K1, K2, alpha, rho, sigma, Sx, 8);
+llk
+toc
+
+tic
+llk1 = posteriorLog_full(Y,coordY, coordX, bi, ncoord, nsubj, nparts, K1, K2, alpha, rho, sigma, Sx, 8);
+llk1
+toc
+
+truellk = log(mvnpdf(Y, 0, S123))
+
+[Lorg, Dorg] = ldl(S123);
 ComparisonFig(Aoutv1.A, Lorg-eye(nsubj*Ncoord));
 S_NNGPInv = (eye(nsubj*Ncoord)-Aoutv1.A)'*Aoutv1.Dinv*(eye(nsubj*Ncoord)-Aoutv1.A);
-SyApprInv = inv(SyAppr);
-ComparisonFig(S_NNGPInv, SyApprInv);
-ComparisonFig(inv(S_NNGPInv), SyAppr);
+SyApprInv = inv(S123);
+% ComparisonFig(S_NNGPInv, SyApprInv);
+ComparisonFig(inv(S_NNGPInv), S123);
+
+llk1 = log(mvnpdf(Y, Aoutv1.A*Y, inv(Aoutv1.Dinv)))
+
 
 figure;
 subplot(2,2,1);imagesc(Aoutv1.A); colormap jet; colorbar;title("NNGP");
 subplot(2,2,2);imagesc(Lorg-eye(nsubj*Ncoord)); colormap jet; colorbar;title("Full GP");
 subplot(2,2,3);imagesc(abs(Aoutv1.A)>0); colormap jet; colorbar;title("NNGP");
 subplot(2,2,4);imagesc(abs(Lorg-eye(nsubj*Ncoord))>0); colormap jet; colorbar;title("Full GP");
+
+
 
 
